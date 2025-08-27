@@ -1,0 +1,25 @@
+def newton(number, guess=None):
+    if guess is None:
+        guess = number / 2
+    new_guess = improveEstimate(guess, number)
+    if limitReached(new_guess, guess):
+        return new_guess
+    return newton(number, new_guess)
+
+def improveEstimate(guess, number):
+    return (guess + number / guess) / 2
+
+def limitReached(new_guess, guess):
+    return abs(new_guess - guess) < 0.0001
+
+def main():
+    while True:
+        user_input = input("Enter a number (type 'exit' to quit): ")
+        if user_input == "exit":
+            break
+        number = float(user_input)
+        sqrt_estimate = newton(number)
+        print(f"Square root of {number} is approximately {sqrt_estimate}")
+
+if __name__ == "__main__":
+    main()
